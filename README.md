@@ -74,8 +74,13 @@ DSH 的全局指令要求"复杂逻辑必须图示化"，默认形式是 ```merm
 2. 点 **安装**，粘贴下面这行（这就是安装地址，不是命令）：
 
    ```
-   github:zach-bworld/dsh-mermaid
+   https://github.com/zach-bworld/dsh-mermaid
    ```
+
+   也接受这几种写法，效果一样：
+   - `github:zach-bworld/dsh-mermaid`
+   - `git@github.com:zach-bworld/dsh-mermaid.git`
+   - 本地目录绝对路径（先 clone 下来）
 
 3. 安装完成后在列表里**启用**它
 4. **刷新页面**（Ctrl+R）或重开窗口
