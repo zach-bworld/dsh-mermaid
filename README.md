@@ -68,20 +68,60 @@ DSH 的全局指令要求"复杂逻辑必须图示化"，默认形式是 ```merm
 
 ## 安装
 
-```powershell
-cd <你的 DSH 目录>
-node build.mjs                 # src/client.js -> lib/client.js，缺 mermaid 时下载
-node install.mjs desktop       # 或 web / 其它 profile 名
-node install.mjs desktop --uninstall
+### 桌面端 App（推荐，普通用户用这个）
+
+1. 打开左侧栏最下方的 **插件**
+2. 点 **安装**，粘贴下面这行（这就是安装地址，不是命令）：
+
+   ```
+   github:zach-bworld/dsh-mermaid
+   ```
+
+3. 安装完成后在列表里**启用**它
+4. **刷新页面**（Ctrl+R）或重开窗口
+
+> 为什么不用命令行：桌面端的 profile 由 App 独占管理，在 PowerShell 里执行 `dsh plugin --profile desktop add …` 会报
+> `profile "desktop" is managed exclusively by the Electron application`。这是设计如此，不是你的问题。
+
+### 命令行 / Web 端
+
+```bash
+dsh plugin --profile web add github:zach-bworld/dsh-mermaid
 ```
 
-`install.mjs` 会把包复制进 `<DSH_HOME>\profiles\<profile>\node_modules\@dsh-external\dsh-mermaid`，并在该 profile 的 `package.json` 里补上依赖（`file:../../plugins-src/dsh-mermaid`）和 `dsh.profile.bundles` 条目。
+`web` 换成你自己的 profile 名即可（常见：`web`、`tui`、`headless`）。
+装完刷新页面。
 
-profile 配置默认开启 HMR（`dsh-base` 的 `hmr` 行），**bundle 选择会被重新读取**，实测桌面端无需重启即生效。
+### 装指定版本
 
-* Windows PowerShell 写出的 profile `package.json` 可能带 BOM，`install.mjs` 会先剥掉。
+```bash
+dsh plugin --profile web add github:zach-bworld/dsh-mermaid#v1.0.0
+```
 
----
+### 卸载
+
+在 App 的插件页移除；或命令行：
+
+```bash
+dsh plugin --profile web remove @…/dsh-mermaid
+```
+
+### 装不上怎么办
+
+| 现象 | 原因 / 处理 |
+| --- | --- |
+| 命令行报 `managed exclusively` | 桌面端请走 App 内的插件页 |
+| 装完没反应 | 客户端 bundle 需要刷新页面才加载 |
+| 提示找不到包 | 检查拼写：`github:zach-bworld/dsh-mermaid`（冒号、斜杠都是必需的） |
+## 开发 / 本地构建
+
+只有改源码时才需要（普通安装可跳过）：
+
+```bash
+node build.mjs     # src/client.js -> lib/client.js；lib/client.mermaid.js 缺失时从 CDN 下载
+```
+
+仓库里已提交构建产物（`lib/`），所以**安装时不需要构建**。
 
 ## 验证方法
 
