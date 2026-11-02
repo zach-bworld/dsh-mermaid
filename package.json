@@ -1,0 +1,51 @@
+{
+  "name": "@dsh-external/dsh-mermaid",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DSH web client plugin: render Markdown ```mermaid fences in the conversation as diagrams, with the source one click away.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "license": "MIT",
+  "author": "zach-bworld",
+  "homepage": "https://github.com/zach-bworld/dsh-mermaid#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zach-bworld/dsh-mermaid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zach-bworld/dsh-mermaid/issues"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "mermaid",
+    "diagram",
+    "markdown"
+  ]
+}
